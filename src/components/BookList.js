@@ -1,15 +1,31 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import BookCard from './BookCard';
+import { getBooks, deleteBook } from 'C:/Users/Uthra/React/book-hub/src/services/apiService';
 
-function BookList({ books }) {
+const BookList = () => {
+  const [books, setBooks] = useState([]);
+
+  useEffect(() => {
+    fetchBooks();
+  }, []);
+
+  const fetchBooks = async () => {
+    const response = await getBooks();
+    setBooks(response.data);
+  };
+
+  const handleDelete = async (id) => {
+    await deleteBook(id);
+    fetchBooks();
+  };
+
   return (
-    <ul>
-      {books.map((book, index) => (
-        <li key={index}>
-          {book.title} by {book.author}
-        </li>
+    <div className="book-list">
+      {books.map((book) => (
+        <BookCard key={book._id} book={book} onDelete={handleDelete} />
       ))}
-    </ul>
+    </div>
   );
-}
+};
 
 export default BookList;
