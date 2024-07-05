@@ -1,17 +1,14 @@
-// src/components/Catalog/AddBook.js
 import React, { useState } from 'react';
 
-function AddBook({ onAdd }) {
+function BookForm({ addBook }) {
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
-  const [isbn, setIsbn] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onAdd({ title, author, isbn });
+    addBook({ title, author });
     setTitle('');
     setAuthor('');
-    setIsbn('');
   };
 
   return (
@@ -20,26 +17,17 @@ function AddBook({ onAdd }) {
         type="text"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
-        placeholder="Title"
-        required
+        placeholder="Book Title"
       />
       <input
         type="text"
         value={author}
         onChange={(e) => setAuthor(e.target.value)}
         placeholder="Author"
-        required
-      />
-      <input
-        type="text"
-        value={isbn}
-        onChange={(e) => setIsbn(e.target.value)}
-        placeholder="ISBN"
-        required
       />
       <button type="submit">Add Book</button>
     </form>
   );
 }
 
-export default AddBook;
+export default BookForm;
