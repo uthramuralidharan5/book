@@ -1,26 +1,26 @@
-import React from 'eact';
-import { BrowserRouter, Route, Switch } from 'eact-router-dom';
-import Header from './Header';
-import Footer from './Footer';
-import BookDetails from './BookDetails';
-import TopRatedBooks from './TopRatedBooks';
-import SearchBooks from './SearchBooks';
-import Login from './Login';
-import NotFound from './NotFound';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import BookDetails from './components/BookDetails';
+import TopRatedBooks from './components/TopRatedBooks';
+import SearchBooks from './components/SearchBooks';
+import Login from './components/Login';
+import NotFound from './components/NotFound';
 
 function App() {
   return (
-    <BrowserRouter>
+    <Router>
       <Header />
-      <Switch>
+      <Routes>
         <Route exact path="/" component={TopRatedBooks} />
         <Route path="/books/:bookId" component={BookDetails} />
         <Route path="/search" component={SearchBooks} />
         <Route path="/login" component={Login} />
         <Route component={NotFound} />
-      </Switch>
+      </Routes>
       <Footer />
-    </BrowserRouter>
+    </Router>
   );
 }
 
